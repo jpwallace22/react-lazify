@@ -36,3 +36,15 @@ export const isReactImported = () => {
 
   return text?.match(regex);
 };
+
+export const setEditor = () => {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    vscode.window.showInformationMessage(
+      "You need to have a file open to use this extension"
+    );
+    throw console.error(Error);
+  }
+
+  return editor;
+};

@@ -1,14 +1,10 @@
 import * as vscode from "vscode";
-import { getPathFromImport } from "./utils/functions";
+import { getPathFromImport, setEditor } from "./utils/functions";
 
-const lazify = async (selection: vscode.Selection) => {
-  const editor = vscode.window.activeTextEditor;
-  if (!editor) {
-    vscode.window.showInformationMessage(
-      "You need to have a file open to use this extension"
-    );
-    return;
-  }
+const convertSelected = async () => {
+  const editor = setEditor();
+
+  const selection = editor?.selection;
   const currentLine = editor.document.lineAt(selection.start);
   const ogText = currentLine.text;
 
@@ -21,6 +17,25 @@ const lazify = async (selection: vscode.Selection) => {
   let workspaceEdit = new vscode.WorkspaceEdit();
   workspaceEdit.replace(editor.document.uri, currentLine.range, newLine);
   await vscode.workspace.applyEdit(workspaceEdit);
+};
+
+const addLazyImport = () => {
+  const editor = setEditor();
+
+  const text = editor.document.getText();
+  const regex = /import .*react.*/gi;
+  const match = text.match(regex);
+
+  const importPosition =
+    match && editor.document.positionAt(text.search(match[0]));
+  const line = editor.document.lineAt(
+    importPosition || editor.document.positionAt(0)
+  );
+  const range = new vscode.Range(line.range.start, line.range.end);
+};
+
+const lazify = () => {
+  convertSelected();
 };
 
 export default lazify;
