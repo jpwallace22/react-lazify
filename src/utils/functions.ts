@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 
 /**
- *
  * @param string any string with a ' " or `
  * @returns the quote that is used in the string
  */
@@ -13,6 +12,10 @@ const getQuoteChar = (string: string) => {
       return quote;
     }
   }
+  vscode.window.showErrorMessage(
+    "Hmm, somethings seams that something went wrong"
+  );
+  throw console.error(Error("No quote detected"));
 };
 
 /**
@@ -21,12 +24,6 @@ const getQuoteChar = (string: string) => {
  */
 export const getStringWithinQuotes = (importString: string) => {
   const char = getQuoteChar(importString);
-  if (!char) {
-    vscode.window.showErrorMessage(
-      "Hmm, somethings seams that something went wrong"
-    );
-    throw console.error(Error("No quote detected from import"));
-  }
   const start = importString.indexOf(char);
   const end = importString.indexOf(char, start + 1) + 1;
   return importString.substring(start, end);
