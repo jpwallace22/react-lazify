@@ -24,3 +24,15 @@ export const getPathFromImport = (importString: string) => {
   const end = importString.indexOf(char, start + 1) + 1;
   return importString.substring(start, end);
 };
+
+/**
+ *
+ * @returns true or false depending on if react is imported on the current file (only works if `import` is present)
+ */
+export const isReactImported = () => {
+  const editor = vscode.window.activeTextEditor;
+  const text = editor?.document.getText();
+  const regex = /import .*react.*/gi;
+
+  return text?.match(regex);
+};
