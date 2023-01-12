@@ -1,5 +1,10 @@
 import * as vscode from "vscode";
 
+/**
+ *
+ * @param string any string with a ' " or `
+ * @returns the quote that is used in the string
+ */
 const getQuoteChar = (string: string) => {
   const quotes = ['"', "'", "`"];
   for (let i = 0; i < quotes.length; i++) {
@@ -14,11 +19,13 @@ const getQuoteChar = (string: string) => {
  * @param importString the full line of an `import` declaration
  * @returns path of import including the quotes
  */
-export const getPathFromImport = (importString: string) => {
+export const getStringWithinQuotes = (importString: string) => {
   const char = getQuoteChar(importString);
   if (!char) {
-    vscode.window.showErrorMessage("Hmm, somethings seams to have gone wrong.");
-    throw console.log(Error);
+    vscode.window.showErrorMessage(
+      "Hmm, somethings seams that something went wrong"
+    );
+    throw console.error(Error("No quote detected from import"));
   }
   const start = importString.indexOf(char);
   const end = importString.indexOf(char, start + 1) + 1;
@@ -26,24 +33,15 @@ export const getPathFromImport = (importString: string) => {
 };
 
 /**
- *
- * @returns true or false depending on if react is imported on the current file (only works if `import` is present)
+ * @returns Returns the `activeTextEditor` or throws an error if no text editor is open
  */
-export const isReactImported = () => {
-  const editor = vscode.window.activeTextEditor;
-  const text = editor?.document.getText();
-  const regex = /import .*react.*/gi;
-
-  return text?.match(regex);
-};
-
 export const setEditor = () => {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
-    vscode.window.showInformationMessage(
+    vscode.window.showErrorMessage(
       "You need to have a file open to use this extension"
     );
-    throw console.error(Error);
+    throw console.error(Error("Editor not open"));
   }
 
   return editor;
