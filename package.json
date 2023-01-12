@@ -6,6 +6,9 @@
   "engines": {
     "vscode": "^1.74.0"
   },
+  "repository": {
+    "url": "https://github.com/jpwallace22/react-lazify"
+  },
   "categories": [
     "Other"
   ],
