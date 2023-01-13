@@ -3,10 +3,10 @@
   "displayName": "React Lazify",
   "description": "A lazy way to perform lazy imports in your React apps.",
   "version": "0.1.1",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "homepage": "https://github.com/jpwallace22/react-lazify",
   "publisher": "jpwallace22",
-  "icon": "src/assets/react-lazy-button.png",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.74.0"
   },
