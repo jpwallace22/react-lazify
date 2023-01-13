@@ -6,6 +6,18 @@ All notable changes to the "react-lazify" extension will be documented in this f
 
 ---
 
+## [0.1.2] - Jan 13 2023
+
+### Added
+
+- Added bug report templates
+
+### Fixed
+
+- Previous release was missing key documentation
+
+---
+
 ## [0.1.1] - Jan 13 2023
 
 ### Added

@@ -2,7 +2,7 @@
   "name": "react-lazify",
   "displayName": "React Lazify",
   "description": "A lazy way to perform lazy imports in your React apps.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "GPL-3.0",
   "homepage": "https://github.com/jpwallace22/react-lazify",
   "publisher": "jpwallace22",
