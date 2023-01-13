@@ -2,11 +2,15 @@
   "name": "react-lazify",
   "displayName": "React Lazify",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.1.1",
+  "license": "MIT",
+  "homepage": "https://github.com/jpwallace22/react-lazify",
+  "publisher": "jpwallace22",
   "engines": {
     "vscode": "^1.74.0"
   },
   "repository": {
+    "type": "git",
     "url": "https://github.com/jpwallace22/react-lazify"
   },
   "categories": [

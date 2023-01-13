@@ -1,4 +1,4 @@
-# React Lazify <image src="src/assets/react-lazy.png" width="50px">
+# React Lazify <image src="https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/react-lazy.png" width="50px">
 
 ## Features
 
