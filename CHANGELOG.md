@@ -4,7 +4,9 @@ All notable changes to the "react-lazify" extension will be documented in this f
 
 ## [Unreleased]
 
-## [0.1.1] - 2023-01-13
+---
+
+## [0.1.1] - Jan 13 2023
 
 ### Added
 
@@ -19,6 +21,8 @@ All notable changes to the "react-lazify" extension will be documented in this f
 
 - README.md for clarification
 
-## [0.1.0] - 2023-01-13
+---
+
+## [0.1.0] - Jan 12 2023
 
 Initial release of React Lazify
