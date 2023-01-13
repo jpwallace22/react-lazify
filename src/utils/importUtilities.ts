@@ -17,14 +17,14 @@ export const addModuleToImport = async (
   if (lineText.includes("{")) {
     let currentModules = lineText.substring(
       lineText.indexOf("{") + 1,
-      lineText.indexOf("}")
+      lineText.indexOf("}") - 1
     );
     if (currentModules.includes(module)) {
       return;
     }
     newLineText = lineText.replace(
       currentModules,
-      `${currentModules}, ${module} `
+      `${currentModules}, ${module}`
     );
     await editor.edit(build => build.replace(line.range, newLineText));
   } else {
@@ -32,7 +32,7 @@ export const addModuleToImport = async (
     newLineText =
       lineText.slice(0, afterDefault) +
       `, { ${module} }` +
-      lineText.slice(afterDefault, -1);
+      lineText.slice(afterDefault, lineText.length);
 
     await editor.edit(build => build.replace(line.range, newLineText));
   }

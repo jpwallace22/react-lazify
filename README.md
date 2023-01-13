@@ -22,6 +22,13 @@ Enable the extension.
 
 This is an alpha release.. There will be plenty of issues to come. If you want to help, please report them [here](https://github.com/jpwallace22/react-lazify/issues) on Github
 
+## Todo
+
+- check if line has an import
+- check if import is default
+- bind hotkey
+- enable multiline ability
+
 ## Release Notes
 
 This is a VERY early release. Maybe even too early to be called alpha

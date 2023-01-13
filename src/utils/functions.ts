@@ -12,10 +12,7 @@ const getQuoteChar = (string: string) => {
       return quote;
     }
   }
-  vscode.window.showErrorMessage(
-    "Hmm, somethings seams that something went wrong"
-  );
-  throw console.error(Error("No quote detected"));
+  return null;
 };
 
 /**
@@ -24,9 +21,12 @@ const getQuoteChar = (string: string) => {
  */
 export const getStringWithinQuotes = (importString: string) => {
   const char = getQuoteChar(importString);
-  const start = importString.indexOf(char);
-  const end = importString.indexOf(char, start + 1) + 1;
-  return importString.substring(start, end);
+  if (char) {
+    const start = importString.indexOf(char);
+    const end = importString.indexOf(char, start + 1) + 1;
+    return importString.substring(start, end);
+  }
+  return null;
 };
 
 /**
