@@ -1,11 +1,12 @@
 {
   "name": "react-lazify",
   "displayName": "React Lazify",
-  "description": "",
+  "description": "A lazy way to perform lazy imports in your React apps.",
   "version": "0.1.0",
-  "license": "MIT",
+  "license": "GPLv3",
   "homepage": "https://github.com/jpwallace22/react-lazify",
   "publisher": "jpwallace22",
+  "icon": "src/assets/react-lazy-button.png",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -25,6 +26,13 @@
       {
         "command": "react-lazify.lazify",
         "title": "Lazify"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+alt+cmd+l",
+        "command": "react-lazify.lazify",
+        "when": "editorTextFocus"
       }
     ]
   },
