@@ -32,12 +32,3 @@ This is an alpha release.. There will be plenty of issues to come. If you want t
 ## Release Notes
 
 This is a VERY early release. Maybe even too early to be called alpha
-
-### 0.1.0
-
-Initial release of React Lazify
-
-### 0.1.1
-
-- Added standard key-binding of `ctrl+alt+cmd+l` for Lazify Command
-- Limit command to `.jsx/.tsx` files
