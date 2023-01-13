@@ -4,9 +4,11 @@
 
 Will change any selected default import into a React Lazy import. Is this really hard to do? No.. however I wanted to learn how to make an extension and I was tired of writing out lazy imports.
 
-`cmd + shift + p` and search `Lazify`
+To use the extension:
 
-Feel free to bind it to any key combo you wish
+- Select the line
+
+Feel free to re-bind it to any key combo you wish
 
 > Incoming: A small video to show how it works.
 
@@ -24,15 +26,18 @@ This is an alpha release.. There will be plenty of issues to come. If you want t
 
 ## Todo
 
-- check if line has an import
-- check if import is default
-- bind hotkey
-- enable multiline ability
+- enable multiline ability.
+- decide where to move the new lazy import to.
 
 ## Release Notes
 
 This is a VERY early release. Maybe even too early to be called alpha
 
-### 0.0.1
+### 0.1.0
 
 Initial release of React Lazify
+
+### 0.1.1
+
+- Added standard key-binding of `ctrl+alt+cmd+l` for Lazify Command
+- Limit command to `.jsx/.tsx` files

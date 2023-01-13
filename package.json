@@ -32,7 +32,7 @@
       {
         "key": "ctrl+alt+cmd+l",
         "command": "react-lazify.lazify",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && editorLangId == typescriptreact || editorLangId == javascriptreact"
       }
     ]
   },
