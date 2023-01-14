@@ -1,10 +1,21 @@
 # Change Log
 
-All notable changes to the "react-lazify" extension will be documented in this file.
+All **notable** changes to React Lazify extension will be documented in this file.
+
+## [Todo]
+
+- Multiple line functionality
+- Ability to set it allow default import (`React.lazy()`)
 
 ## [Unreleased]
 
+<br>
+
 ---
+
+---
+
+<br>
 
 ## [0.1.2] - Jan 13 2023
 
@@ -16,7 +27,13 @@ All notable changes to the "react-lazify" extension will be documented in this f
 
 - Previous release was missing key documentation
 
+<br>
+
 ---
+
+---
+
+<br>
 
 ## [0.1.1] - Jan 13 2023
 
@@ -33,7 +50,13 @@ All notable changes to the "react-lazify" extension will be documented in this f
 
 - README.md for clarification
 
+<br>
+
 ---
+
+---
+
+<br>
 
 ## [0.1.0] - Jan 12 2023
 

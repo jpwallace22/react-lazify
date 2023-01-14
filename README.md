@@ -11,7 +11,11 @@ To use the extension:
   - If you hate the keybinding. Feel free to change it to whatever you want.
 - You can also use the command palette (`shift+cmd+P`) and select Lazify
 
+<br>
+
 ![Demo](https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/demo.gif)
+
+<br>
 
 ## Requirements
 
