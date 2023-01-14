@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { getStringWithinQuotes, setEditor } from "./utils/functions";
-import { addNamedImport } from "./utils/importUtilities";
+import { getStringWithinQuotes, setEditor } from "../utils/functions";
+import type { IConfiguration } from ".";
 
-const convertSelected = async () => {
+export default async (importConfig?: IConfiguration["imports"]) => {
   const editor = setEditor();
 
   const selection = editor?.selection;
@@ -19,7 +19,10 @@ const convertSelected = async () => {
   const component = ogText.split(" ")[1];
   const path = getStringWithinQuotes(ogText);
 
-  const newLine = `const ${component} = lazy(() => import(${path}));`;
+  const newLine = `const ${component} = ${
+    importConfig?.useDefaultReactImport ? "React.lazy" : "lazy"
+  }(() => import(${path}));`;
+
   if (component && path) {
     await editor.edit(build => build.replace(currentLine.range, newLine));
   } else {
@@ -28,10 +31,3 @@ const convertSelected = async () => {
     );
   }
 };
-
-const lazify = async () => {
-  await convertSelected();
-  await addNamedImport("lazy", "react");
-};
-
-export default lazify;

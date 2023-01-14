@@ -22,6 +22,16 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Lazify",
+      "properties": {
+        "lazify.imports.useDefaultReactImport": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, all imports will use React.lazy() instead of just lazy()"
+        }
+      }
+    },
     "commands": [
       {
         "command": "react-lazify.lazify",
