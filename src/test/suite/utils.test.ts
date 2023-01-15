@@ -18,7 +18,7 @@ suite("Utils Test Suite", () => {
       const editor = vscode.window.activeTextEditor;
       const start = new vscode.Position(0, 0);
       await utils.addModuleToImport("Test", start);
-      // Run twice to ensure it doesn't duplicate
+      // Should not duplicate
       await utils.addModuleToImport("Test", start);
 
       assert.strictEqual(
@@ -53,10 +53,36 @@ suite("Utils Test Suite", () => {
     it("Should find and add module after default import", async () => {
       const editor = vscode.window.activeTextEditor;
       await utils.addNamedImport("Test", "react");
+      // Should not duplicate
+      await utils.addNamedImport("Test", "react");
 
       assert.strictEqual(
         editor?.document.lineAt(new vscode.Position(1, 0)).text,
         "import Fake, { Test } from 'react';"
+      );
+    });
+  });
+
+  describe("addDefaultImport(module, importPath)", async () => {
+    it("Should add new default import at the top of the file", async () => {
+      const editor = vscode.window.activeTextEditor;
+      await utils.addDefaultImport("Test", "@test-package");
+
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(0, 0)).text,
+        "import Test from '@test-package';"
+      );
+    });
+
+    it("Should find and add default import before modules", async () => {
+      const editor = vscode.window.activeTextEditor;
+      await utils.addDefaultImport("Test", "place");
+      // Should not duplicate
+      await utils.addDefaultImport("Test", "place");
+
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(0, 0)).text,
+        "import Test, { Fake } from 'place';"
       );
     });
   });

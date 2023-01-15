@@ -84,12 +84,11 @@ export const addDefaultImport = async (
     : new vscode.Position(0, 0);
   if (match) {
     const line = editor.document.lineAt(importPosition);
-    const modStart = line.text.indexOf("{");
-    if (modStart !== -1) {
+    if (line.text[7] === "{") {
       const newLine =
-        line.text.slice(0, modStart) +
+        line.text.slice(0, 7) +
         `${importName}, ` +
-        line.text.slice(modStart, line.text.length);
+        line.text.slice(7, line.text.length);
 
       await editor.edit(build => build.replace(line.range, newLine));
     }
