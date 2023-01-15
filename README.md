@@ -2,7 +2,7 @@
 
 ## Features
 
-Will change any selected default import into a React Lazy import. Is this really hard to do? No.. however I wanted to learn how to make an extension and I was tired of writing out lazy imports.
+Will change any selected default import into a React Lazy import. Is this really hard to do? No.. however I wanted to learn how to make an extension and I was tired of writing out lazy imports
 
 To use the extension:
 
