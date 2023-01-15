@@ -3,26 +3,20 @@ name: Check Types && Test
 on: [pull_request]
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
+  build:
     strategy:
       matrix:
-        node-version: [18.12.1]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Compile
-        run: yarn compile
-
-      - name: Run Tests
-        run: yarn test
-
-      - name: Typecheck
-        uses: andoshin11/typescript-error-reporter-action@v1.0.2
+          node-version: 16.x
+      - run: yarn install --frozen-lockfile
+      - run: xvfb-run -a yarn test
+        if: runner.os == 'Linux'
+      - run: yarn test
+        if: runner.os != 'Linux'
