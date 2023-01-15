@@ -1,4 +1,4 @@
-name: Check Types
+name: Check Types && Test
 
 on: [pull_request]
 
@@ -26,8 +26,3 @@ jobs:
 
       - name: Run Tests
         run: yarn test
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
