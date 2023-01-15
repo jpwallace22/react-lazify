@@ -8,9 +8,26 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 ## [Unreleased]
 
-- Ability to set it allow default import (`React.lazy()`)
+<br>
 
-  <br>
+---
+
+---
+
+<br>
+
+## [0.2.0] - Jan 15 2023
+
+### Added
+
+- Ability to set allow default import (`React.lazy()`) through settings
+- CI/CD pipeline tests for Windows, Mac & Linux
+
+### Fixed
+
+- Minor async bug that would duplicate imports
+
+<br>
 
 ---
 
