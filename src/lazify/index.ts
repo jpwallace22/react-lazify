@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getStringWithinQuotes, noop, setEditor } from "../utils/functions";
-import { addNamedImport } from "../utils/importUtilities";
+import { addImport, addNamedImport } from "../utils/importUtilities";
 
 export interface IConfiguration {
   imports?: {
@@ -28,8 +28,14 @@ export default async ({ imports }: IConfiguration) => {
   }(() => import(${path}));`;
 
   if (component && path) {
+    const importName = imports?.useDefaultReactImport ? "React" : "lazy";
+
     await editor.edit(build => build.replace(currentLine.range, newLine));
-    await addNamedImport("lazy", "react");
+    await addImport(
+      importName,
+      "react",
+      imports?.useDefaultReactImport ? "default" : "named"
+    );
   } else {
     vscode.window.showInformationMessage(
       "Oops! You need to select an import statement"
