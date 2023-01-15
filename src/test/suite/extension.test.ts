@@ -53,10 +53,10 @@ suite("Extension Test Suite", () => {
         );
       }, 1);
 
-      // assert.strictEqual(
-      //   editor?.document.lineAt(new vscode.Position(0, 0)).text,
-      //   "import React, { lazy } from 'react';"
-      // );
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(0, 0)).text,
+        "import React from 'react';"
+      );
     });
 
     it("Should NOT attempt to convert the blank line", async () => {

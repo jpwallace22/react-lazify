@@ -8,7 +8,7 @@ export interface IConfiguration {
   };
 }
 
-export default async ({ imports }: IConfiguration) => {
+const lazify = async ({ imports }: IConfiguration) => {
   const editor = setEditor();
   const selection = editor?.selection;
   const currentLine = editor.document.lineAt(selection.start);
@@ -43,3 +43,5 @@ export default async ({ imports }: IConfiguration) => {
     return noop;
   }
 };
+
+export default lazify;
