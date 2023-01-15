@@ -1,4 +1,4 @@
-name: Check Types && Test
+name: Tests
 
 on: [pull_request]
 
