@@ -20,16 +20,19 @@ suite("Extension Test Suite", () => {
         by: "line",
         value: 1,
       });
+
       await vscode.commands.executeCommand("react-lazify.lazify");
 
-      assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(1, 0)).text,
-        "const SomeComponent = lazy(() => import('this/component/path'));"
-      );
-      assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(0, 0)).text,
-        "import React, { lazy } from 'react';"
-      );
+      setTimeout(async () => {
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(1, 0)).text,
+          "const SomeComponent = lazy(() => import('this/component/path'));"
+        );
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(0, 0)).text,
+          "import React, { lazy } from 'react';"
+        );
+      }, 1);
     });
 
     it("Should convert the selection and import as default", async () => {
@@ -51,12 +54,11 @@ suite("Extension Test Suite", () => {
           editor?.document.lineAt(new vscode.Position(1, 0)).text,
           "const SomeComponent = React.lazy(() => import('this/component/path'));"
         );
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(0, 0)).text,
+          "import React from 'react';"
+        );
       }, 1);
-
-      assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(0, 0)).text,
-        "import React from 'react';"
-      );
     });
 
     it("Should NOT attempt to convert the blank line", async () => {

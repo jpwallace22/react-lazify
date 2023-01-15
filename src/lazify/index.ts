@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
-import { getStringWithinQuotes, noop, setEditor } from "../utils/functions";
-import { addImport, addNamedImport } from "../utils/importUtilities";
+import { setEditor } from "../utils/functions";
+import { addImport } from "../utils/importUtilities";
+import convertLine from "./convertLine";
 
 export interface IConfiguration {
   imports?: {
@@ -8,49 +9,39 @@ export interface IConfiguration {
   };
 }
 
-const convertLine = async (
-  text: string,
-  line: vscode.TextLine,
-  useDefaultReactImport: boolean = false
-) => {
-  const editor = setEditor();
-  const component = text.split(" ")[1];
-  const path = getStringWithinQuotes(text);
-  const newLine = `const ${component} = ${
-    useDefaultReactImport ? "React.lazy" : "lazy"
-  }(() => import(${path}));`;
-
-  if (component && path) {
-    const importName = useDefaultReactImport ? "React" : "lazy";
-
-    await editor.edit(build => build.replace(line.range, newLine));
-    await addImport(
-      importName,
-      "react",
-      useDefaultReactImport ? "default" : "named"
-    );
-  } else {
-    return noop;
-  }
-};
-
 const lazify = async ({ imports }: IConfiguration) => {
   const editor = setEditor();
-  const selection = editor?.selection;
-  const start = selection.start.line;
-  const end = selection.end.line;
+  const workspace = new vscode.WorkspaceEdit();
+  const selections = editor?.selections;
 
-  for (let i = start; i <= end; i++) {
-    const line = editor.document.lineAt(i);
-    const ogText = line.text;
-    if (line.text.includes("{")) {
-      vscode.window.showInformationMessage(
-        "React.lazy only works on default imports"
-      );
-      continue;
+  // For each cursor on the document
+  selections.forEach(async selection => {
+    const start = selection.start.line;
+    const end = selection.end.line;
+
+    // Loop through entire selection from each cursor
+    for (let i = start; i <= end; i++) {
+      const line = editor.document.lineAt(i);
+      // ensure the current line is a default import
+      if (line.text.includes("{")) {
+        vscode.window.showInformationMessage(
+          "React.lazy only works on default imports"
+        );
+        continue;
+      }
+
+      await convertLine(line, imports?.useDefaultReactImport, workspace);
     }
-    await convertLine(ogText, line, imports?.useDefaultReactImport);
-  }
+
+    // apply edits and if success add import
+    const convertSuccess = await vscode.workspace.applyEdit(workspace);
+    convertSuccess &&
+      (await addImport(
+        imports?.useDefaultReactImport ? "React" : "lazy",
+        "react",
+        imports?.useDefaultReactImport ? "default" : "named"
+      ));
+  });
 };
 
 export default lazify;
