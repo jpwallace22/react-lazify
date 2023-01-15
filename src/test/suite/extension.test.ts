@@ -9,6 +9,7 @@ suite("Extension Test Suite", () => {
         content:
           "import React from 'react';\nimport SomeComponent from 'this/component/path';\n\nimport { SomeComponent } from 'this/component/path';\n",
       });
+
       await vscode.window.showTextDocument(document);
     });
 
@@ -28,6 +29,33 @@ suite("Extension Test Suite", () => {
       assert.strictEqual(
         editor?.document.lineAt(new vscode.Position(0, 0)).text,
         "import React, { lazy } from 'react';"
+      );
+    });
+
+    it("Should convert the selection and import as default", async () => {
+      const editor = vscode.window.activeTextEditor;
+      await vscode.commands.executeCommand("cursorMove", {
+        to: "down",
+        by: "line",
+        value: 1,
+      });
+
+      const settings = vscode.workspace.getConfiguration("lazify");
+      await settings.update("imports.useDefaultReactImport", true, true);
+
+      setTimeout(async () => {
+        await vscode.commands.executeCommand("react-lazify.lazify");
+        await settings.update("imports.useDefaultReactImport", false, true);
+
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(1, 0)).text,
+          "const SomeComponent = React.lazy(() => import('this/component/path'));"
+        );
+      }, 1);
+
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(0, 0)).text,
+        "import React from 'react';"
       );
     });
 

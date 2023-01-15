@@ -5,11 +5,12 @@ All **notable** changes to React Lazify extension will be documented in this fil
 ## [Todo]
 
 - Multiple line functionality
-- Ability to set it allow default import (`React.lazy()`)
 
 ## [Unreleased]
 
-<br>
+- Ability to set it allow default import (`React.lazy()`)
+
+  <br>
 
 ---
 

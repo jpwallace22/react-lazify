@@ -17,19 +17,32 @@ To use the extension:
 
 <br>
 
+## Extension Settings
+
+Default keyboard shortcut — `ctrl+opt+cmd+L`
+
+All settings can be set in `settings.json`
+
+```json
+// If true, all imports will use React.lazy() instead of lazy()
+"lazify.imports.useDefaultReactImport": boolean;
+```
+
+<br>
+
 ## Requirements
 
 Very lightweight and dependency free.
 
 Only works in `.jsx` and `.tsx` files. But I couldn't imagine why you would need it in any other type of file.
 
-## Extension Settings
-
-Default keyboard shortcut is `ctrl+opt+cmd+L`
+<br>
 
 ## Known Issues
 
 This is an alpha release.. There will be plenty of issues to come. If you want to help, please report them [here](https://github.com/jpwallace22/react-lazify/issues) on Github
+
+<br>
 
 ## Release Notes
 

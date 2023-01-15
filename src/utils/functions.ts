@@ -43,3 +43,5 @@ export const setEditor = () => {
 
   return editor;
 };
+
+export const noop = (): void => {};

@@ -7,12 +7,15 @@
  */
 
 import * as vscode from "vscode";
-import lazify from "./lazify";
+import lazify, { IConfiguration } from "./lazify";
 
 export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand(
-    "react-lazify.lazify",
-    lazify
+  const imports: IConfiguration["imports"] | undefined = vscode.workspace
+    .getConfiguration("lazify")
+    .get("imports");
+
+  let disposable = vscode.commands.registerCommand("react-lazify.lazify", () =>
+    lazify({ imports })
   );
 
   context.subscriptions.push(disposable);
