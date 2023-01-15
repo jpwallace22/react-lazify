@@ -11,9 +11,10 @@ export interface IConfiguration {
 const lazify = async ({ imports }: IConfiguration) => {
   const editor = setEditor();
   const selection = editor?.selection;
+  console.log(selection);
   const currentLine = editor.document.lineAt(selection.start);
   const ogText = currentLine.text;
-
+  console.log("poop");
   if (currentLine.text.includes("{")) {
     vscode.window.showInformationMessage(
       "React.lazy only works on default imports"
