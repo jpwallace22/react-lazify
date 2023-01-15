@@ -18,7 +18,7 @@ suite("Utils Test Suite", () => {
       const editor = vscode.window.activeTextEditor;
       const start = new vscode.Position(0, 0);
       await utils.addModuleToImport("Test", start);
-      // Ran twice to ensure it doesn't duplicate
+      // Run twice to ensure it doesn't duplicate
       await utils.addModuleToImport("Test", start);
 
       assert.strictEqual(
@@ -54,12 +54,10 @@ suite("Utils Test Suite", () => {
       const editor = vscode.window.activeTextEditor;
       await utils.addNamedImport("Test", "react");
 
-      setTimeout(() => {
-        assert.strictEqual(
-          editor?.document.lineAt(new vscode.Position(1, 0)).text,
-          "import Fake, { Test } from 'react';"
-        );
-      }, 1);
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(1, 0)).text,
+        "import Fake, { Test } from 'react';"
+      );
     });
   });
 });

@@ -55,7 +55,7 @@ export const addNamedImport = async (
   let importPosition: vscode.Position;
   if (match) {
     importPosition = editor.document.positionAt(text.search(match[0]));
-    addModuleToImport(moduleName, importPosition);
+    await addModuleToImport(moduleName, importPosition);
   } else {
     await editor.edit(build =>
       build.insert(
