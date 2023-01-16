@@ -13,7 +13,7 @@ suite("Utils Test Suite", () => {
     await vscode.window.showTextDocument(document);
   });
 
-  describe("addModuleToImport(module, position)", async () => {
+  describe("addModuleToImport()", async () => {
     it("should insert module into {}", async () => {
       const editor = vscode.window.activeTextEditor;
       const start = new vscode.Position(0, 0);
@@ -39,7 +39,7 @@ suite("Utils Test Suite", () => {
     });
   });
 
-  describe("addNamedImport(module, importPath)", async () => {
+  describe("addNamedImport()", async () => {
     it("Should add new named import at the top of the file", async () => {
       const editor = vscode.window.activeTextEditor;
       await utils.addNamedImport("Test", "@test-package");
@@ -63,7 +63,7 @@ suite("Utils Test Suite", () => {
     });
   });
 
-  describe("addDefaultImport(module, importPath)", async () => {
+  describe("addDefaultImport()", async () => {
     it("Should add new default import at the top of the file", async () => {
       const editor = vscode.window.activeTextEditor;
       await utils.addDefaultImport("Test", "@test-package");
