@@ -21,7 +21,7 @@ const convertLine = async (
     useDefaultReactImport ? "React.lazy" : "lazy"
   }(() => import(${path}));`;
 
-  if (component && path) {
+  if (component && path && text) {
     if (workspace) {
       workspace.replace(editor.document.uri, line.range, newLine);
     } else {
