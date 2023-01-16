@@ -1,18 +1,54 @@
 import * as assert from "assert";
 import * as vscode from "vscode";
 import { beforeEach, describe, it, suite } from "mocha";
+import convertLine from "../../lazify/convertLine";
 
-suite("Extension Test Suite", () => {
-  describe("Lazify", async () => {
-    beforeEach(async () => {
-      const document = await vscode.workspace.openTextDocument({
-        content:
-          "import React from 'react';\nimport SomeComponent from 'this/component/path';\n\nimport { SomeComponent } from 'this/component/path';\n",
-      });
+const template = `
+import React from 'react';
+import SomeComponent from 'this/component/path';
+import { SomeComponent } from 'this/component/path';
+`;
 
-      await vscode.window.showTextDocument(document);
+suite("Extension Test Suite", async () => {
+  beforeEach(async () => {
+    const document = await vscode.workspace.openTextDocument({
+      content: template,
     });
 
+    await vscode.window.showTextDocument(document);
+  });
+
+  describe("convertLine()", async () => {
+    it("Should convert the line with lazy()", async () => {
+      const editor = vscode.window.activeTextEditor;
+      const line = editor?.document?.lineAt(
+        new vscode.Position(2, 0)
+      ) as vscode.TextLine;
+
+      await convertLine(line, false);
+
+      assert.strictEqual(
+        editor?.document?.lineAt(new vscode.Position(2, 0)).text,
+        "const SomeComponent = lazy(() => import('this/component/path'));"
+      );
+    });
+
+    it("Should convert the line with React", async () => {
+      const editor = vscode.window.activeTextEditor;
+      const line = editor?.document?.lineAt(
+        new vscode.Position(2, 0)
+      ) as vscode.TextLine;
+
+      await convertLine(line, true);
+
+      assert.strictEqual(
+        editor?.document?.lineAt(new vscode.Position(2, 0)).text,
+        "const SomeComponent = React.lazy(() => import('this/component/path'));"
+      );
+    });
+  });
+
+  describe("lazify()", async () => {
     it("Should convert the selection and import", async () => {
       const editor = vscode.window.activeTextEditor;
       await vscode.commands.executeCommand("cursorMove", {
@@ -20,16 +56,19 @@ suite("Extension Test Suite", () => {
         by: "line",
         value: 1,
       });
+
       await vscode.commands.executeCommand("react-lazify.lazify");
 
-      assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(1, 0)).text,
-        "const SomeComponent = lazy(() => import('this/component/path'));"
-      );
-      assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(0, 0)).text,
-        "import React, { lazy } from 'react';"
-      );
+      setTimeout(async () => {
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(2, 0)).text,
+          "const SomeComponent = lazy(() => import('this/component/path'));"
+        );
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(1, 0)).text,
+          "import React, { lazy } from 'react';"
+        );
+      }, 1);
     });
 
     it("Should convert the selection and import as default", async () => {
@@ -51,12 +90,11 @@ suite("Extension Test Suite", () => {
           editor?.document.lineAt(new vscode.Position(1, 0)).text,
           "const SomeComponent = React.lazy(() => import('this/component/path'));"
         );
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(0, 0)).text,
+          "import React from 'react';"
+        );
       }, 1);
-
-      assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(0, 0)).text,
-        "import React from 'react';"
-      );
     });
 
     it("Should NOT attempt to convert the blank line", async () => {
@@ -69,11 +107,11 @@ suite("Extension Test Suite", () => {
       await vscode.commands.executeCommand("react-lazify.lazify");
 
       assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(1, 0)).text,
+        editor?.document.lineAt(new vscode.Position(2, 0)).text,
         "import SomeComponent from 'this/component/path';"
       );
       assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(0, 0)).text,
+        editor?.document.lineAt(new vscode.Position(1, 0)).text,
         "import React from 'react';"
       );
     });
@@ -88,7 +126,7 @@ suite("Extension Test Suite", () => {
       await vscode.commands.executeCommand("react-lazify.lazify");
 
       assert.strictEqual(
-        editor?.document.lineAt(new vscode.Position(0, 0)).text,
+        editor?.document.lineAt(new vscode.Position(1, 0)).text,
         "import React from 'react';"
       );
       assert.strictEqual(

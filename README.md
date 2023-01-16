@@ -7,6 +7,7 @@ Will change any selected default import into a React Lazy import. Is this really
 To use the extension:
 
 - Select the component you wish to change to a lazy import
+  - Supports selections with multiple cursors and highlighting
 - Use the keyboard shortcut `ctrl+opt+cmd+L` to make it lazy
   - If you hate the keybinding. Feel free to change it to whatever you want.
 - You can also use the command palette (`shift+cmd+P`) and select Lazify
@@ -21,10 +22,12 @@ To use the extension:
 
 Default keyboard shortcut — `ctrl+opt+cmd+L`
 
-All settings can be set in `settings.json`
+```ts
+// settings.json
 
-```json
-// If true, all imports will use React.lazy() instead of lazy()
+/**
+ * If true, all imports will use React.lazy() instead of lazy()
+ */
 "lazify.imports.useDefaultReactImport": boolean;
 ```
 

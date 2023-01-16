@@ -4,9 +4,9 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 ## [Todo]
 
-- Multiple line functionality
-
 ## [Unreleased]
+
+- Multiple line functionality with highlighting and cursor
 
 <br>
 

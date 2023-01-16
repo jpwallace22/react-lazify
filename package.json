@@ -48,10 +48,10 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
+    "vscode:prepublish": "yarn compile",
+    "compile": "rimraf out && tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
+    "pretest": "yarn compile && yarn lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "check-types": "tsc --noEmit",
@@ -69,6 +69,7 @@
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "mocha": "^10.1.0",
+    "rimraf": "^4.0.6",
     "typescript": "^4.9.3"
   }
 }
