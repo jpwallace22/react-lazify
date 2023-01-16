@@ -1,8 +1,8 @@
-# React Lazify <image src="https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/react-lazy.png" width="50px">
+# **React Lazify** <image src="https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/react-lazy.png" width="50px">
 
-## Features
+## **Features**
 
-Will change any selected default import into a React Lazy import. Is this really hard to do? No.. however I wanted to learn how to make an extension and I was tired of writing out lazy imports
+Will change any selected default import into a React Lazy import. Is this really hard to do? No.. However, I was tired of writing out lazy imports.
 
 To use the extension:
 
@@ -14,39 +14,45 @@ To use the extension:
 
 <br>
 
-![Demo](https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/new_demo.gif)
 
 <br>
 
-## Extension Settings
+## **Extension Settings**
 
-Default keyboard shortcut — `ctrl+opt+cmd+L`
+- Default keyboard shortcut — `ctrl+opt+cmd+L`
+
+### Optional Settings
 
 ```ts
 // settings.json
 
-/**
- * If true, all imports will use React.lazy() instead of lazy()
- */
-"lazify.imports.useDefaultReactImport": boolean;
+ // If true, all imports will use React.lazy() instead of lazy()
+"lazify.imports.useDefaultReactImport": boolean; // default = false
 ```
 
-<br>
+## **Requirements**
 
-## Requirements
+- Lightweight and dependency free.
+- Tested on Linux, Mac, and Windows OS
+- Only works in `.jsx` and `.tsx` files. (But I couldn't imagine why you would need it in any other type of file.)
 
-Very lightweight and dependency free.
+## **Known Issues**
 
-Only works in `.jsx` and `.tsx` files. But I couldn't imagine why you would need it in any other type of file.
+No known issues at this time, though I'm sure there will be plenty to come. If you want to help, **PLEASE** report any issues or feature requests [on Github](https://github.com/jpwallace22/react-lazify/issues)
 
-<br>
-
-## Known Issues
-
-This is an alpha release.. There will be plenty of issues to come. If you want to help, please report them [here](https://github.com/jpwallace22/react-lazify/issues) on Github
-
-<br>
-
-## Release Notes
+## **Release Notes**
 
 Check out the [Change Log](CHANGELOG.md)
+
+<br>
+
+# **Contributors**
+
+## Author
+
+<a href="https://github.com/jpwallace22" style="display: inline-block; text-align: center;">
+   <img src="https://avatars.githubusercontent.com/u/93415734?v=4" width="150;" style="border-radius: 50%;" alt="jpwallace22"/>
+   <br />
+   <small><b>Justin Wallace</b></small>
+</a>
