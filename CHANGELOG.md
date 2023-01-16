@@ -4,9 +4,27 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 ## [Todo]
 
+- Add option to convert to lazy on auto import
+
 ## [Unreleased]
 
+<br>
+
+---
+
+---
+
+<br>
+
+## [0.3.0] - Jan 16 2023
+
+### Added
+
 - Multiple line functionality with highlighting and cursor
+
+### Fixed
+
+- Blank import bug with Windows OS
 
 <br>
 
