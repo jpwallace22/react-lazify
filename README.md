@@ -49,7 +49,7 @@ Check out the [Change Log](CHANGELOG.md)
 
 # **Contributors**
 
-## Author
+### Author
 
 <a href="https://github.com/jpwallace22" style="display: inline-block; text-align: center;">
    <img src="https://avatars.githubusercontent.com/u/93415734?v=4" width="150;" style="border-radius: 50%;" alt="jpwallace22"/>
