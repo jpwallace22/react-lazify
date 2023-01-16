@@ -31,7 +31,8 @@ const lazify = async ({ imports }: IConfiguration) => {
       }
 
       // Add edits to a workspace
-      await convertLine(line, imports?.useDefaultReactImport, workspace);
+      line.text &&
+        (await convertLine(line, imports?.useDefaultReactImport, workspace));
     }
 
     // Apply all edits and if success add import
