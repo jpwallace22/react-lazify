@@ -21,7 +21,7 @@
   "activationEvents": [
     "onCommand:react-lazify.lazify"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
       "title": "Lazify",
@@ -49,11 +49,11 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn compile",
-    "compile": "rimraf out && tsc -p ./",
+    "compile": "rimraf dist && tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "yarn compile && yarn lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
+    "test": "node ./dist/test/runTest.js",
     "check-types": "tsc --noEmit",
     "deploy": "vsce publish --yarn"
   },
