@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { setEditor } from "../utils/functions";
 import { addImport } from "../utils/importUtilities";
-import convertLine from "./convertLine";
+import convertLineToLazy from "./convertLineToLazy";
 
 export interface IConfiguration {
   imports?: {
@@ -32,7 +32,11 @@ const lazify = async ({ imports }: IConfiguration) => {
 
       // Add edits to a workspace
       line.text &&
-        (await convertLine(line, imports?.useDefaultReactImport, workspace));
+        (await convertLineToLazy(
+          line,
+          imports?.useDefaultReactImport,
+          workspace
+        ));
     }
 
     // Apply all edits and if success add import

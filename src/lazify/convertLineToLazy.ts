@@ -7,7 +7,7 @@ import { addImport } from "../utils/importUtilities";
  * @param useDefaultReactImport If true, will convert to React.lazy()
  * @param workspace If added, will add edits to the workspace, if not, will apply the edits directly.
  */
-const convertLine = async (
+const convertLineToLazy = async (
   line: vscode.TextLine,
   useDefaultReactImport: boolean = false,
   workspace?: vscode.WorkspaceEdit
@@ -37,4 +37,4 @@ const convertLine = async (
     return noop();
   }
 };
-export default convertLine;
+export default convertLineToLazy;

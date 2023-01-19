@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as vscode from "vscode";
 import { beforeEach, describe, it, suite } from "mocha";
-import convertLine from "../../lazify/convertLine";
+import convertLine from "../../lazify/convertLineToLazy";
 
 const template = `
 import React from 'react';
