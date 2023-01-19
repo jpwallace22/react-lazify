@@ -1,5 +1,10 @@
 # **React Lazify** <image src="https://raw.githubusercontent.com/jpwallace22/react-lazify/main/src/assets/react-lazy.png" width="50px">
 
+![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/jpwallace22.react-lazify?color=007173)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/jpwallace22.react-lazify?color=007173)
+![Visual Studio Marketplace Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/jpwallace22.react-lazify?color=007173)
+![GitHub top language](https://img.shields.io/github/languages/top/jpwallace22/react-lazify?color=007173)
+
 ## **Features**
 
 Will change any selected default import into a React Lazy import. Is this really hard to do? No.. However, I was tired of writing out lazy imports.
