@@ -44,4 +44,22 @@ export const setEditor = () => {
   return editor;
 };
 
+/**
+ * Takes a vscode.TextLine and returns the name of the component if the TextLine is a valid JSX component.
+ */
+export const componentNameFromJsx = (line: vscode.TextLine) => {
+  const jsxStart = line.text.indexOf("<");
+  if (jsxStart === -1) {
+    return null;
+  }
+  const indexes = [
+    line.text.indexOf(">", jsxStart),
+    line.text.indexOf("/", jsxStart),
+    line.text.indexOf(" ", jsxStart),
+  ];
+  const jsxEnd = Math.min(...indexes.filter(i => i !== -1));
+
+  return line.text.slice(jsxStart + 1, jsxEnd);
+};
+
 export const noop = (): void => {};
