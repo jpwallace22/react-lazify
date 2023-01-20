@@ -5,10 +5,10 @@ import { addImport } from "../utils/importUtilities";
 export const lazyImportString = (
   component: string,
   path: string,
-  useDefaultReactImport: boolean
+  isDefaultImport: boolean = false
 ) =>
   `const ${component} = ${
-    useDefaultReactImport ? "React.lazy" : "lazy"
+    isDefaultImport ? "React.lazy" : "lazy"
   }(() => import(${path}));`;
 
 /**
