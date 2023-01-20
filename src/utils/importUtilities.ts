@@ -39,10 +39,9 @@ export const addModuleToImport = async (
 };
 
 /**
+ * If the import exists, the module name will be added to it, else it will create a new import at the top of the file
  * @param moduleName Name of the module or modules you want to import (multiple modules should be coma separated)
  * @param importLocation where the import is coming from
- *
- * If the import exists, the module name will be added to it, else it will create a new import at the top of the file
  */
 export const addNamedImport = async (
   moduleName: string,
@@ -67,10 +66,9 @@ export const addNamedImport = async (
 };
 
 /**
+ * If the import exists, the name will be added in front of the modules, else it will create a new import at the top of the file
  * @param importName The name of the import to be added
  * @param importPath where the import is coming from
- *
- * If the import exists, the name will be added in front of the modules, else it will create a new import at the top of the file
  */
 export const addDefaultImport = async (
   importName: string,
@@ -103,11 +101,10 @@ export const addDefaultImport = async (
 };
 
 /**
+ * If the import exists, the name/modules will be added to the existing, else it will create a new import at the top of the file
  * @param importName The name of the import (or modules) to be added. (multiple modules should be coma separated)
  * @param importPath where the import is coming from
  * @param type named or default. Modules are named imports
- *
- * If the import exists, the name/modules will be added to the existing, else it will create a new import at the top of the file
  */
 export const addImport = async (
   importName: string,
@@ -117,4 +114,25 @@ export const addImport = async (
   type === "named"
     ? await addNamedImport(importName, importPath)
     : await addDefaultImport(importName, importPath);
+};
+
+/**
+ * Takes the document text as returns the last line that starts with the word `import` as a vscode.TextLine
+ * @param docText full document
+ * @returns The last line that starts with the word 'import'
+ */
+export const getLastImportLine = (docText: string): vscode.TextLine => {
+  const editor = setEditor();
+  let lastImportLine = 0;
+  const lines = docText.split("/n");
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (lines[i].startsWith("import")) {
+      lastImportLine = i;
+      break;
+    }
+    if (lines[i].startsWith("const")) {
+      return editor.document.lineAt(lastImportLine);
+    }
+  }
+  return editor.document.lineAt(lastImportLine);
 };
