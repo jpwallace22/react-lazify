@@ -3,6 +3,7 @@ import { beforeEach, describe, it, suite } from "mocha";
 
 import * as vscode from "vscode";
 import * as utils from "../../utils/importUtilities";
+import * as funcs from "../../utils/functions";
 
 suite("Utils Test Suite", () => {
   vscode.window.showInformationMessage("Start all tests.");
@@ -97,6 +98,29 @@ suite("Utils Test Suite", () => {
         lastLine?.text,
         editor?.document.lineAt(new vscode.Position(1, 0)).text
       );
+    });
+  });
+
+  describe("getEditor()", () => {
+    it("Should assign the vscode editor", () => {
+      assert.doesNotThrow(funcs.setEditor);
+    });
+
+    it("Should throw an error", async () => {
+      await vscode.commands.executeCommand("workbench.action.closeAllEditors");
+      assert.throws(funcs.setEditor);
+    });
+  });
+
+  describe("getQuotesChar()", () => {
+    it("Should assign the correct quote", () => {
+      assert.strictEqual(funcs.getQuoteChar('this is a " string'), '"');
+      assert.strictEqual(funcs.getQuoteChar(`this is a ' string`), `'`);
+      assert.strictEqual(funcs.getQuoteChar("this is a ` string"), "`");
+    });
+
+    it("Should return undefined", async () => {
+      assert.equal(funcs.getQuoteChar("nothing"), undefined);
     });
   });
 });
