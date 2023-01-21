@@ -121,18 +121,17 @@ export const addImport = async (
  * @param docText full document
  * @returns The last line that starts with the word 'import'
  */
-export const getLastImportLine = (docText: string): vscode.TextLine => {
+export const getLastImportLine = (
+  docText?: string
+): vscode.TextLine | undefined => {
+  if (!docText) {
+    return;
+  }
   const editor = setEditor();
-  let lastImportLine = 0;
-  const lines = docText.split("/n");
+  const lines = docText.split("\n");
   for (let i = lines.length - 1; i >= 0; i--) {
     if (lines[i].startsWith("import")) {
-      lastImportLine = i;
-      break;
-    }
-    if (lines[i].startsWith("const")) {
-      return editor.document.lineAt(lastImportLine);
+      return editor.document.lineAt(i);
     }
   }
-  return editor.document.lineAt(lastImportLine);
 };
