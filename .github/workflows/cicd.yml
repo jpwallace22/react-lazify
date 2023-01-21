@@ -16,19 +16,14 @@ jobs:
         with:
           node-version: 16.x
       - run: yarn install --frozen-lockfile
-      - run: |
-          if [ "$RUNNER_OS" == "Linux" ]; then
-               xvfb-run -a yarn test
-          elif [ "$RUNNER_OS" == "Windows" ]; then
-               yarn test
-          elif
-               [ "$RUNNER_OS" == "macOS" ]; then
-               yarn test:coverage
-          else
-               echo "$RUNNER_OS not supported"
-               exit 1
-          fi
+      - run: xvfb-run -a yarn test
+        if: runner.os == 'Linux'
+      - run: yarn test:coverage
+        if: runner.os == 'macOs'
+      - run: yarn test
+        if: runner.os == 'Windows'
       - name: Upload coverage to Codecov
+        if: runner.os == "macOs"
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
