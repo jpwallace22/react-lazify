@@ -39,8 +39,6 @@ const convertLineToLazy = async (
         useDefaultReactImport ? "default" : "named"
       );
     }
-  } else {
-    return noop();
   }
 };
 export default convertLineToLazy;
