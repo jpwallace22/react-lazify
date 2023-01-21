@@ -2,12 +2,21 @@ import * as vscode from "vscode";
 import { getStringWithinQuotes, noop, setEditor } from "../utils/functions";
 import { addImport } from "../utils/importUtilities";
 
+export const lazyImportString = (
+  component: string,
+  path: string,
+  isDefaultImport: boolean = false
+) =>
+  `const ${component} = ${
+    isDefaultImport ? "React.lazy" : "lazy"
+  }(() => import(${path}));`;
+
 /**
  * @param line must be of type TextLine
  * @param useDefaultReactImport If true, will convert to React.lazy()
  * @param workspace If added, will add edits to the workspace, if not, will apply the edits directly.
  */
-const convertLine = async (
+const convertLineToLazy = async (
   line: vscode.TextLine,
   useDefaultReactImport: boolean = false,
   workspace?: vscode.WorkspaceEdit
@@ -17,11 +26,8 @@ const convertLine = async (
   const component = text.split(" ")[1];
   const path = getStringWithinQuotes(text);
 
-  const newLine = `const ${component} = ${
-    useDefaultReactImport ? "React.lazy" : "lazy"
-  }(() => import(${path}));`;
-
   if (component && path && text) {
+    const newLine = lazyImportString(component, path, useDefaultReactImport);
     if (workspace) {
       workspace.replace(editor.document.uri, line.range, newLine);
     } else {
@@ -37,4 +43,4 @@ const convertLine = async (
     return noop();
   }
 };
-export default convertLine;
+export default convertLineToLazy;

@@ -8,6 +8,8 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 ## [Unreleased]
 
+- feat: add ability to covert to lazy import from components JSX
+
 <br>
 
 ---

@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
-import { setEditor } from "../utils/functions";
+import { componentNameFromJsx, setEditor } from "../utils/functions";
 import { addImport } from "../utils/importUtilities";
-import convertLine from "./convertLine";
+import addLazyImportFromJsx from "./addLazyFromJsx";
+import convertLineToLazy from "./convertLineToLazy";
 
 export interface IConfiguration {
   imports?: {
@@ -22,17 +23,23 @@ const lazify = async ({ imports }: IConfiguration) => {
     // Loop through entire selection from each cursor
     for (let i = start; i <= end; i++) {
       const line = editor.document.lineAt(i);
-      // ensure the current line is a default import
-      if (line.text.includes("{")) {
-        vscode.window.showInformationMessage(
-          "React.lazy only works on default imports"
-        );
+
+      const jsxComponent = componentNameFromJsx(line);
+      if (jsxComponent) {
+        await addLazyImportFromJsx(jsxComponent, imports, workspace);
         continue;
       }
 
-      // Add edits to a workspace
+      if (line.text.includes("{")) {
+        continue;
+      }
+
       line.text &&
-        (await convertLine(line, imports?.useDefaultReactImport, workspace));
+        (await convertLineToLazy(
+          line,
+          imports?.useDefaultReactImport,
+          workspace
+        ));
     }
 
     // Apply all edits and if success add import
