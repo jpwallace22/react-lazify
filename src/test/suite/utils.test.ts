@@ -100,6 +100,10 @@ suite("Utils Test Suite", () => {
       );
     });
   });
+  it("Should return undefined", async () => {
+    assert.equal(utils.getLastImportLine(""), undefined);
+    assert.equal(utils.getLastImportLine("nothing"), undefined);
+  });
 
   describe("getEditor()", () => {
     it("Should assign the vscode editor", () => {

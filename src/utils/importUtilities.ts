@@ -110,11 +110,10 @@ export const addImport = async (
   importName: string,
   importPath: string,
   type: "named" | "default"
-) => {
+) =>
   type === "named"
     ? await addNamedImport(importName, importPath)
     : await addDefaultImport(importName, importPath);
-};
 
 /**
  * Takes the document text as returns the last line that starts with the word `import` as a vscode.TextLine
