@@ -4,7 +4,7 @@ import * as vscode from "vscode";
  * @param string any string with a ' " or `
  * @returns the quote that is used in the string
  */
-const getQuoteChar = (string: string) => {
+export const getQuoteChar = (string: string) => {
   const quotes = ['"', "'", "`"];
   for (let i = 0; i < quotes.length; i++) {
     const quote = quotes[i];
@@ -12,7 +12,6 @@ const getQuoteChar = (string: string) => {
       return quote;
     }
   }
-  return null;
 };
 
 /**
@@ -26,7 +25,6 @@ export const getStringWithinQuotes = (importString: string) => {
     const end = importString.indexOf(char, start + 1) + 1;
     return importString.substring(start, end);
   }
-  return null;
 };
 
 /**
