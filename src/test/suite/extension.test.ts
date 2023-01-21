@@ -7,6 +7,7 @@ const template = `
 import React from 'react';
 import SomeComponent from 'this/component/path';
 import { SomeComponent } from 'this/component/path';
+<SomeComponent this={jsx}>Make me Lazy!</SomeComponent>
 `;
 
 suite("Extension Test Suite", async () => {
@@ -54,7 +55,29 @@ suite("Extension Test Suite", async () => {
       await vscode.commands.executeCommand("cursorMove", {
         to: "down",
         by: "line",
-        value: 1,
+        value: 2,
+      });
+
+      await vscode.commands.executeCommand("react-lazify.lazify");
+
+      setTimeout(async () => {
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(2, 0)).text,
+          "const SomeComponent = lazy(() => import('this/component/path'));"
+        );
+        assert.strictEqual(
+          editor?.document.lineAt(new vscode.Position(1, 0)).text,
+          "import React, { lazy } from 'react';"
+        );
+      }, 1);
+    });
+
+    it("Should convert the JSX selection and import", async () => {
+      const editor = vscode.window.activeTextEditor;
+      await vscode.commands.executeCommand("cursorMove", {
+        to: "down",
+        by: "line",
+        value: 4,
       });
 
       await vscode.commands.executeCommand("react-lazify.lazify");

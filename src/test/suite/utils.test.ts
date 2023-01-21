@@ -8,7 +8,8 @@ suite("Utils Test Suite", () => {
   vscode.window.showInformationMessage("Start all tests.");
   beforeEach(async () => {
     const document = await vscode.workspace.openTextDocument({
-      content: "import { Fake } from 'place';\nimport Fake from 'react';\n",
+      content:
+        "import { Fake } from 'place';\nimport Fake from 'react';\nimport Fake from 'react';\n",
     });
     await vscode.window.showTextDocument(document);
   });
@@ -83,6 +84,18 @@ suite("Utils Test Suite", () => {
       assert.strictEqual(
         editor?.document.lineAt(new vscode.Position(0, 0)).text,
         "import Test, { Fake } from 'place';"
+      );
+    });
+  });
+
+  describe("getLastImportLine()", async () => {
+    it("Should return the last line with an import", async () => {
+      const editor = vscode.window.activeTextEditor;
+      const lastLine = utils.getLastImportLine(editor?.document?.getText());
+
+      assert.equal(
+        lastLine?.text,
+        editor?.document.lineAt(new vscode.Position(1, 0)).text
       );
     });
   });
