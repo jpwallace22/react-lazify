@@ -18,5 +18,9 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: xvfb-run -a yarn test
         if: runner.os == 'Linux'
-      - run: yarn test
+      - run: yarn test:coverage
         if: runner.os != 'Linux'
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

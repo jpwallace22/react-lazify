@@ -69,6 +69,7 @@
     "pretest": "yarn compile && yarn lint",
     "lint": "eslint src --ext ts",
     "test": "node ./dist/test/runTest.js",
+    "test:coverage": "c8 --check-coverage yarn test",
     "check-types": "tsc --noEmit",
     "deploy": "vsce publish --yarn"
   },
@@ -81,6 +82,7 @@
     "@typescript-eslint/parser": "^5.45.0",
     "@vscode/test-electron": "^2.2.0",
     "@vscode/vsce": "^2.16.0",
+    "c8": "^7.12.0",
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "mocha": "^10.1.0",

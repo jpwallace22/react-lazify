@@ -1,0 +1,6 @@
+{
+  "all": true,
+  "include": ["dist/**"],
+  "exclude": ["**/node_modules/**", "dist/test/"],
+  "reporter": ["text-summary", "text", "lcov"]
+}
