@@ -8,7 +8,21 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 ## [Unreleased]
 
+<br>
+
+---
+
+---
+
+<br>
+
+## [0.4.0] - Jan 21 2023
+
+### Added
+
 - feat: add ability to covert to lazy import from components JSX
+- test: increased test coverage to 99%
+- cicd: added test coverage reporting to the pipeline
 
 <br>
 
