@@ -10,7 +10,7 @@ suite("Utils Test Suite", () => {
   beforeEach(async () => {
     const document = await vscode.workspace.openTextDocument({
       content:
-        "import { Fake } from 'place';\nimport Fake from 'react';\nimport Fake from 'react';\n",
+        "import { Fake } from 'place';\nimport Fake from 'react';\nimport Fake from 'react';\n<JSXComp>Text</JSXComp>\n",
     });
     await vscode.window.showTextDocument(document);
   });
@@ -89,8 +89,8 @@ suite("Utils Test Suite", () => {
     });
   });
 
-  describe("getLastImportLine()", async () => {
-    it("Should return the last line with an import", async () => {
+  describe("getLastImportLine()", () => {
+    it("Should return the last line with an import", () => {
       const editor = vscode.window.activeTextEditor;
       const lastLine = utils.getLastImportLine(editor?.document?.getText());
 
@@ -100,7 +100,7 @@ suite("Utils Test Suite", () => {
       );
     });
   });
-  it("Should return undefined", async () => {
+  it("Should return undefined", () => {
     assert.equal(utils.getLastImportLine(""), undefined);
     assert.equal(utils.getLastImportLine("nothing"), undefined);
   });
@@ -123,8 +123,32 @@ suite("Utils Test Suite", () => {
       assert.strictEqual(funcs.getQuoteChar("this is a ` string"), "`");
     });
 
-    it("Should return undefined", async () => {
+    it("Should return undefined", () => {
       assert.equal(funcs.getQuoteChar("nothing"), undefined);
+    });
+  });
+
+  describe("addImport()", () => {
+    const name = "Name";
+    const path = "the/path";
+
+    it("Should call addNamed", () => {
+      assert.ok(utils.addImport(name, path, "named"));
+    });
+    it("Should call addDefault", () => {
+      assert.ok(utils.addImport(name, path, "default"));
+    });
+  });
+
+  describe("componentNameFromJsx()", () => {
+    it("Should call return the component name from jsx", () => {
+      const editor = vscode.window.activeTextEditor;
+      const jsxLine = new vscode.Position(3, 0);
+
+      const compName = funcs.componentNameFromJsx(
+        editor?.document.lineAt(jsxLine) as vscode.TextLine
+      );
+      assert.strictEqual(compName, "JSXComp");
     });
   });
 });
