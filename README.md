@@ -3,6 +3,7 @@
 ![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/jpwallace22.react-lazify?color=007173)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/jpwallace22.react-lazify?color=007173)
 ![Visual Studio Marketplace Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/jpwallace22.react-lazify?color=007173)
+![Codecov](https://img.shields.io/codecov/c/github/jpwallace22/react-lazify?color=007173)
 ![GitHub top language](https://img.shields.io/github/languages/top/jpwallace22/react-lazify?color=007173)
 
 ## **Features**
