@@ -10,7 +10,7 @@ export interface IConfiguration {
   };
 }
 
-const lazify = async ({ imports }: IConfiguration) => {
+const lazify = ({ imports }: IConfiguration) => {
   const editor = setEditor();
   const workspace = new vscode.WorkspaceEdit();
   const selections = editor?.selections;
@@ -50,6 +50,7 @@ const lazify = async ({ imports }: IConfiguration) => {
         "react",
         imports?.useDefaultReactImport ? "default" : "named"
       ));
+    return;
   });
 };
 

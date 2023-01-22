@@ -2,6 +2,7 @@ import * as assert from "assert";
 import * as vscode from "vscode";
 import { beforeEach, describe, it, suite } from "mocha";
 import convertLine from "../../lazify/convertLineToLazy";
+import lazify from "../../lazify";
 
 const template = `
 import React from 'react';
@@ -58,18 +59,59 @@ suite("Extension Test Suite", async () => {
         value: 2,
       });
 
-      await vscode.commands.executeCommand("react-lazify.lazify");
+      lazify({ imports: { useDefaultReactImport: false } });
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-      setTimeout(async () => {
-        assert.strictEqual(
-          editor?.document.lineAt(new vscode.Position(2, 0)).text,
-          "const SomeComponent = lazy(() => import('this/component/path'));"
-        );
-        assert.strictEqual(
-          editor?.document.lineAt(new vscode.Position(1, 0)).text,
-          "import React, { lazy } from 'react';"
-        );
-      }, 1);
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(2, 0)).text,
+        "const SomeComponent = lazy(() => import('this/component/path'));"
+      );
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(1, 0)).text,
+        "import React, { lazy } from 'react';"
+      );
+    });
+
+    it("Should convert the selection and import as default", async () => {
+      const editor = vscode.window.activeTextEditor;
+      await vscode.commands.executeCommand("cursorMove", {
+        to: "down",
+        by: "line",
+        value: 2,
+      });
+
+      lazify({ imports: { useDefaultReactImport: true } });
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(2, 0)).text,
+        "const SomeComponent = React.lazy(() => import('this/component/path'));"
+      );
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(1, 0)).text,
+        "import React from 'react';"
+      );
+    });
+
+    it("Should NOT convert the named import", async () => {
+      const editor = vscode.window.activeTextEditor;
+      await vscode.commands.executeCommand("cursorMove", {
+        to: "down",
+        by: "line",
+        value: 3,
+      });
+
+      lazify({ imports: { useDefaultReactImport: false } });
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(1, 0)).text,
+        "import React from 'react';"
+      );
+      assert.strictEqual(
+        editor?.document.lineAt(new vscode.Position(3, 0)).text,
+        "import { SomeComponent } from 'this/component/path';"
+      );
     });
 
     it("Should convert the JSX selection and import", async () => {
