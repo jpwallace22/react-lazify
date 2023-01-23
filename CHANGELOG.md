@@ -5,6 +5,7 @@ All **notable** changes to React Lazify extension will be documented in this fil
 ## [Todo]
 
 - Add option to convert to lazy on auto import
+- Refactor importPath logic
 
 ## [Unreleased]
 

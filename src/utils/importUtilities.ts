@@ -49,7 +49,9 @@ export const addNamedImport = async (
 ) => {
   const editor = setEditor();
   const docText = editor.document.getText();
-  const match = docText.match(new RegExp(`import .*${importPath}.*`));
+  const match =
+    docText.match(new RegExp(`import .*"${importPath}".*`)) ||
+    docText.match(new RegExp(`import .*'${importPath}'.*`));
   const importPosition = match
     ? editor.document.positionAt(docText.search(match[0]))
     : new vscode.Position(0, 0);
@@ -76,7 +78,9 @@ export const addDefaultImport = async (
 ) => {
   const editor = setEditor();
   const docText = editor.document.getText();
-  const match = docText.match(new RegExp(`import .*${importPath}.*`));
+  const match =
+    docText.match(new RegExp(`import .*"${importPath}".*`)) ||
+    docText.match(new RegExp(`import .*'${importPath}'.*`));
   const importPosition = match
     ? editor.document.positionAt(docText.search(match[0]))
     : new vscode.Position(0, 0);
