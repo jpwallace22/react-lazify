@@ -17,6 +17,20 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 <br>
 
+## [0.4.1] - Jan 23 2023
+
+### Fixed
+
+- fix: import path regex specificity — thanks [@cjcartier](https://github.com/cjcartier)
+
+<br>
+
+---
+
+---
+
+<br>
+
 ## [0.4.0] - Jan 21 2023
 
 ### Added
