@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import { beforeEach, describe, it, suite } from "mocha";
 import convertLine from "../../lazify/convertLineToLazy";
 import lazify from "../../lazify";
+import { IConfiguration, importConfig } from "../../lazify/config";
 
 const template = `
 import React from 'react';
@@ -12,6 +13,16 @@ import { SomeComponent } from 'this/component/path';
 `;
 
 suite("Extension Test Suite", async () => {
+  const createConfig = (
+    framework = "react",
+    defaultImport = false
+  ): IConfiguration["importConfig"] => {
+    return {
+      frameworkSource: framework as "react" | "loadable" | "next",
+      useDefaultReactImport: defaultImport,
+    };
+  };
+
   beforeEach(async () => {
     const document = await vscode.workspace.openTextDocument({
       content: template,
@@ -27,7 +38,7 @@ suite("Extension Test Suite", async () => {
         new vscode.Position(2, 0)
       ) as vscode.TextLine;
 
-      await convertLine(line, false);
+      await convertLine(line, createConfig());
 
       assert.strictEqual(
         editor?.document?.lineAt(new vscode.Position(2, 0)).text,
@@ -41,7 +52,7 @@ suite("Extension Test Suite", async () => {
         new vscode.Position(2, 0)
       ) as vscode.TextLine;
 
-      await convertLine(line, true);
+      await convertLine(line, createConfig("react", true));
 
       assert.strictEqual(
         editor?.document?.lineAt(new vscode.Position(2, 0)).text,
@@ -59,7 +70,9 @@ suite("Extension Test Suite", async () => {
         value: 2,
       });
 
-      lazify({ imports: { useDefaultReactImport: false } });
+      lazify({
+        importConfig: createConfig(),
+      });
       await new Promise(resolve => setTimeout(resolve, 500));
 
       assert.strictEqual(
@@ -80,7 +93,9 @@ suite("Extension Test Suite", async () => {
         value: 2,
       });
 
-      lazify({ imports: { useDefaultReactImport: true } });
+      lazify({
+        importConfig: createConfig("react", true),
+      });
       await new Promise(resolve => setTimeout(resolve, 500));
 
       assert.strictEqual(
@@ -101,7 +116,9 @@ suite("Extension Test Suite", async () => {
         value: 3,
       });
 
-      lazify({ imports: { useDefaultReactImport: false } });
+      lazify({
+        importConfig: createConfig(),
+      });
       await new Promise(resolve => setTimeout(resolve, 500));
 
       assert.strictEqual(
