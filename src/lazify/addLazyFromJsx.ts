@@ -1,11 +1,11 @@
-import { IConfiguration } from ".";
 import * as vscode from "vscode";
 import { setEditor } from "../utils/functions";
+import { IConfiguration } from "./config";
 import convertLineToLazy from "./convertLineToLazy";
 
 const addLazyImportFromJsx = async (
   component: string,
-  importConfig: IConfiguration["imports"],
+  importConfig: IConfiguration["importConfig"],
   workspace?: vscode.WorkspaceEdit
 ) => {
   const editor = setEditor();
@@ -16,7 +16,7 @@ const addLazyImportFromJsx = async (
     const compLine = editor.document.positionAt(existingComp.index).line;
     await convertLineToLazy(
       editor.document.lineAt(compLine),
-      importConfig?.useDefaultReactImport,
+      importConfig,
       workspace
     );
     vscode.window.showInformationMessage(

@@ -2,15 +2,10 @@ import * as vscode from "vscode";
 import { componentNameFromJsx, setEditor } from "../utils/functions";
 import { addImport } from "../utils/importUtilities";
 import addLazyImportFromJsx from "./addLazyFromJsx";
+import { IConfiguration, lazyFrameworkInfo } from "./config";
 import convertLineToLazy from "./convertLineToLazy";
 
-export interface IConfiguration {
-  imports?: {
-    useDefaultReactImport?: boolean;
-  };
-}
-
-const lazify = ({ imports }: IConfiguration) => {
+const lazify = ({ importConfig }: IConfiguration) => {
   const editor = setEditor();
   const workspace = new vscode.WorkspaceEdit();
   const selections = editor?.selections;
@@ -26,7 +21,7 @@ const lazify = ({ imports }: IConfiguration) => {
 
       const jsxComponent = componentNameFromJsx(line);
       if (jsxComponent) {
-        await addLazyImportFromJsx(jsxComponent, imports, workspace);
+        await addLazyImportFromJsx(jsxComponent, importConfig, workspace);
         continue;
       }
 
@@ -34,21 +29,17 @@ const lazify = ({ imports }: IConfiguration) => {
         continue;
       }
 
-      line.text &&
-        (await convertLineToLazy(
-          line,
-          imports?.useDefaultReactImport,
-          workspace
-        ));
+      line.text && (await convertLineToLazy(line, importConfig, workspace));
     }
 
     // Apply all edits and if success add import
     const convertSuccess = await vscode.workspace.applyEdit(workspace);
+    const { importName, importPath } = lazyFrameworkInfo(importConfig);
     convertSuccess &&
       (await addImport(
-        imports?.useDefaultReactImport ? "React" : "lazy",
-        "react",
-        imports?.useDefaultReactImport ? "default" : "named"
+        importName,
+        importPath,
+        importName === "React" ? "default" : "named"
       ));
     return;
   });

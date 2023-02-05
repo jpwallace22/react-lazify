@@ -17,7 +17,7 @@
     "vscode-extension",
     "lazy"
   ],
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "GPL-3.0",
   "homepage": "https://github.com/jpwallace22/react-lazify",
   "publisher": "jpwallace22",
@@ -45,6 +45,16 @@
           "type": "boolean",
           "default": false,
           "description": "If true, all imports will use React.lazy() instead of just lazy()"
+        },
+        "lazify.imports.frameworkSource": {
+          "type": "string",
+          "default": "react",
+          "enum": [
+            "react",
+            "loadable",
+            "next"
+          ],
+          "description": "'react', 'next', or 'gatsby'. Lazify will use the lazy import from whichever framework you specify."
         }
       }
     },
@@ -70,7 +80,7 @@
     "lint": "eslint src --ext ts",
     "test": "node ./dist/test/runTest.js",
     "test:coverage": "c8 --check-coverage yarn test",
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc --noEmit --skipLibCheck",
     "deploy": "vsce publish --yarn"
   },
   "husky": {

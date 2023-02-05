@@ -1,14 +1,15 @@
 import * as vscode from "vscode";
-import { getStringWithinQuotes, noop, setEditor } from "../utils/functions";
+import { getStringWithinQuotes, setEditor } from "../utils/functions";
 import { addImport } from "../utils/importUtilities";
+import { IConfiguration, lazyFrameworkInfo } from "./config";
 
 export const lazyImportString = (
   component: string,
   path: string,
-  isDefaultImport: boolean = false
+  importConfig: IConfiguration["importConfig"]
 ) =>
   `const ${component} = ${
-    isDefaultImport ? "React.lazy" : "lazy"
+    lazyFrameworkInfo(importConfig)?.functionName
   }(() => import(${path}));`;
 
 /**
@@ -18,7 +19,7 @@ export const lazyImportString = (
  */
 const convertLineToLazy = async (
   line: vscode.TextLine,
-  useDefaultReactImport: boolean = false,
+  importConfig: IConfiguration["importConfig"],
   workspace?: vscode.WorkspaceEdit
 ) => {
   const editor = setEditor();
@@ -27,16 +28,16 @@ const convertLineToLazy = async (
   const path = getStringWithinQuotes(text);
 
   if (component && path && text) {
-    const newLine = lazyImportString(component, path, useDefaultReactImport);
+    const newLine = lazyImportString(component, path, importConfig);
     if (workspace) {
       workspace.replace(editor.document.uri, line.range, newLine);
     } else {
-      const importName = useDefaultReactImport ? "React" : "lazy";
+      const { importName, importPath } = lazyFrameworkInfo(importConfig);
       await editor.edit(build => build.replace(line.range, newLine));
       await addImport(
         importName,
-        "react",
-        useDefaultReactImport ? "default" : "named"
+        importPath,
+        importName === "React" ? "default" : "named"
       );
     }
   }
