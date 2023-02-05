@@ -59,6 +59,34 @@ suite("Extension Test Suite", async () => {
         "const SomeComponent = React.lazy(() => import('this/component/path'));"
       );
     });
+
+    it("Should convert the line with Next", async () => {
+      const editor = vscode.window.activeTextEditor;
+      const line = editor?.document?.lineAt(
+        new vscode.Position(2, 0)
+      ) as vscode.TextLine;
+
+      await convertLine(line, createConfig("next"));
+
+      assert.strictEqual(
+        editor?.document?.lineAt(new vscode.Position(3, 0)).text,
+        "const SomeComponent = dynamic(() => import('this/component/path'));"
+      );
+    });
+
+    it("Should convert the line with Loadable", async () => {
+      const editor = vscode.window.activeTextEditor;
+      const line = editor?.document?.lineAt(
+        new vscode.Position(2, 0)
+      ) as vscode.TextLine;
+
+      await convertLine(line, createConfig("loadable"));
+
+      assert.strictEqual(
+        editor?.document?.lineAt(new vscode.Position(3, 0)).text,
+        "const SomeComponent = loadable(() => import('this/component/path'));"
+      );
+    });
   });
 
   describe("lazify()", async () => {
