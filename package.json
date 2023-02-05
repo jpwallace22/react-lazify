@@ -17,7 +17,7 @@
     "vscode-extension",
     "lazy"
   ],
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "GPL-3.0",
   "homepage": "https://github.com/jpwallace22/react-lazify",
   "publisher": "jpwallace22",

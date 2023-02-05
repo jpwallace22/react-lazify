@@ -8,7 +8,7 @@
 
 ## **Features**
 
-Will change any selected default import into a React Lazy import. Is this really hard to do? No.. However, I was tired of writing out lazy imports.
+Will change any selected default import into a Lazy import. Supports React lazy imports, Next dynamic imports, and Loadable loadable imports.
 
 To use the extension:
 
@@ -45,8 +45,17 @@ Since this is all about being **lazy** you can also convert your imports straigh
 ```ts
 // settings.json
 
- // If true, all imports will use React.lazy() instead of lazy()
-"lazify.imports.useDefaultReactImport": boolean; // default = false
+ /**
+ * If true, all imports will use React.lazy() instead of lazy()
+ * @default false
+ */
+"lazify.imports.useDefaultReactImport": boolean;
+
+ /**
+ * Lazify will use the lazy import from whichever framework you specify
+ * @default 'react'
+ */
+"lazify.imports.frameworkSource": 'react' | 'next' | 'loadable',
 ```
 
 ## **Requirements**

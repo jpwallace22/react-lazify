@@ -5,10 +5,25 @@ All **notable** changes to React Lazify extension will be documented in this fil
 ## [Todo]
 
 - Add option to convert to lazy on auto import
-- Refactor importPath logic
 
 ## [Unreleased]
 
+<br>
+
+---
+
+---
+
+<br>
+
+## [0.4.2] - Feb 05 2023
+
+### Feature
+
+- feat: add next/loadable options
+- refactor: streamline options logic
+
+<br>
 <br>
 
 ---
