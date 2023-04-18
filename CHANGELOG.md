@@ -16,6 +16,21 @@ All **notable** changes to React Lazify extension will be documented in this fil
 
 <br>
 
+## [0.4.3] - Apr 17 2023
+
+### Feature
+
+- fix: `dynamic` imports now import as default
+
+<br>
+<br>
+
+---
+
+---
+
+<br>
+
 ## [0.4.2] - Feb 05 2023
 
 ### Feature
