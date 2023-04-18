@@ -33,13 +33,14 @@ const lazify = ({ importConfig }: IConfiguration) => {
     }
 
     // Apply all edits and if success add import
+    const defaultImports = ["React", "dynamic"];
     const convertSuccess = await vscode.workspace.applyEdit(workspace);
     const { importName, importPath } = lazyFrameworkInfo(importConfig);
     convertSuccess &&
       (await addImport(
         importName,
         importPath,
-        importName === "React" ? "default" : "named"
+        defaultImports.includes(importName) ? "default" : "named"
       ));
     return;
   });
