@@ -75,6 +75,7 @@
   "scripts": {
     "vscode:prepublish": "yarn compile",
     "compile": "rimraf dist && tsc -p ./",
+    "build": "rimraf dist && tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "yarn compile && yarn lint",
     "lint": "eslint src --ext ts",
