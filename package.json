@@ -23,7 +23,7 @@
   "publisher": "jpwallace22",
   "icon": "icon.png",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.78.0"
   },
   "repository": {
     "type": "git",
@@ -32,9 +32,6 @@
   "categories": [
     "Formatters",
     "Other"
-  ],
-  "activationEvents": [
-    "onCommand:react-lazify.lazify"
   ],
   "main": "./dist/extension.js",
   "contributes": {
