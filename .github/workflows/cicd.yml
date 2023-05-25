@@ -24,6 +24,7 @@ jobs:
           cache: "yarn"
       - run: yarn
 
+        if: runner.os == 'macOs'
       - run: yarn test:coverage
 
         if: runner.os == 'Linux'
