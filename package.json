@@ -17,7 +17,7 @@
     "vscode-extension",
     "lazy"
   ],
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "GPL-3.0",
   "homepage": "https://github.com/jpwallace22/react-lazify",
   "publisher": "jpwallace22",
@@ -89,22 +89,22 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.2",
-    "@commitlint/config-conventional": "^17.4.2",
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "@types/vscode": "^1.74.0",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.77.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "@vscode/test-electron": "^2.2.0",
-    "@vscode/vsce": "^2.16.0",
-    "c8": "^7.12.0",
-    "eslint": "^8.28.0",
+    "@vscode/vsce": "^2.19.0",
+    "c8": "^7.13.0",
+    "eslint": "^8.41.0",
     "glob": "^8.0.3",
     "husky": "4.3.8",
     "mocha": "^10.1.0",
     "rimraf": "^4.0.6",
-    "typescript": "^4.9.3"
+    "typescript": "^5.0.4"
   }
 }

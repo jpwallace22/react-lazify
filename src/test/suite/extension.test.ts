@@ -14,11 +14,11 @@ import { SomeComponent } from 'this/component/path';
 
 suite("Extension Test Suite", async () => {
   const createConfig = (
-    framework = "react",
+    framework: "react" | "loadable" | "next" = "react",
     defaultImport = false
   ): IConfiguration["importConfig"] => {
     return {
-      frameworkSource: framework as "react" | "loadable" | "next",
+      frameworkSource: framework,
       useDefaultReactImport: defaultImport,
     };
   };
