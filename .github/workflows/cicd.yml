@@ -22,13 +22,14 @@ jobs:
         with:
           node-version: 18.x
           cache: "yarn"
+      - run: yarn
 
-      - name: Install project dependencies
-        run: yarn
-
-      - run: yarn test
+      - run: yarn test:coverage
         if: runner.os == 'macOs'
-      - run: xvfb-run -a yarn test:coverage
+      - run: xvfb-run -a yarn test
+        if: runner.os == 'Linux'
+      - run: yarn test
+
       - name: Upload coverage to Codecov
         if: runner.os == 'macOs'
         uses: codecov/codecov-action@v3
