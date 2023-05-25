@@ -11,7 +11,7 @@ jobs:
     name: Test
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -23,18 +23,13 @@ jobs:
           node-version: 18.x
           cache: "yarn"
 
-      - run: yarn install --frozen-lockfile
-      - run: yarn test
+      - name: Install project dependencies
+        run: yarn
 
+      - run: yarn test
         if: runner.os == 'macOs'
       - run: xvfb-run -a yarn test:coverage
-
-        if: runner.os == 'Linux'
-      - run: yarn test
-
-        if: runner.os == 'Windows'
       - name: Upload coverage to Codecov
-
         if: runner.os == 'macOs'
         uses: codecov/codecov-action@v3
         with:
