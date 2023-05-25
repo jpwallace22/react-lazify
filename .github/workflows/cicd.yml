@@ -21,12 +21,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+          cache: "yarn"
 
       - run: yarn install --frozen-lockfile
-      - run: yarn test:coverage
+      - run: yarn test
 
         if: runner.os == 'macOs'
-      - run: xvfb-run -a yarn test
+      - run: xvfb-run -a yarn test:coverage
 
         if: runner.os == 'Linux'
       - run: yarn test
