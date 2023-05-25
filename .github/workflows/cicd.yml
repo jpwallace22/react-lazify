@@ -22,13 +22,16 @@ jobs:
         with:
           node-version: 18.x
           cache: "yarn"
+
       - run: yarn
-
-        if: runner.os == 'macOs'
       - run: yarn test:coverage
+        if: runner.os == 'macOs'
 
-        if: runner.os == 'Linux'
       - run: xvfb-run -a yarn test
+        if: runner.os == 'Linux'
+
+      - run: yarn test
+        if: runner.os == 'Windows'
 
       - name: Upload coverage to Codecov
         if: runner.os == 'macOs'
