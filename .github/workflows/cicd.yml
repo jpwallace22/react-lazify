@@ -25,10 +25,9 @@ jobs:
       - run: yarn
 
       - run: yarn test:coverage
-        if: runner.os == 'macOs'
-      - run: xvfb-run -a yarn test
+
         if: runner.os == 'Linux'
-      - run: yarn test
+      - run: xvfb-run -a yarn test
 
       - name: Upload coverage to Codecov
         if: runner.os == 'macOs'
