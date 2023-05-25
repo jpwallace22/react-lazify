@@ -72,4 +72,4 @@ jobs:
         id: "release"
         uses: codfish/semantic-release-action@v2.2.0
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
