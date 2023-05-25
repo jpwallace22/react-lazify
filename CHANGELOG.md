@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/jpwallace22/react-lazify/compare/v0.4.0...v0.4.1) (2023-05-25)
+
+
+### Performance Improvements
+
+* upgrade to VScode engine 1.78 ([c7381fa](https://github.com/jpwallace22/react-lazify/commit/c7381fa4f94933cfe71c355bc396c707efb616a4))
+
 # [0.4.0](https://github.com/jpwallace22/react-lazify/compare/v0.3.1...v0.4.0) (2023-05-25)
 
 
