@@ -28,18 +28,7 @@ jobs:
         run: |
           echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache yarn dependencies
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            **/node_modules
-          key: our-cache-yarn-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install packages
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn
+      - run: yarn install --frozen-lockfile
       - run: yarn test:coverage
         if: runner.os == 'macOs'
 
