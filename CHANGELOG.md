@@ -1,3 +1,22 @@
+# [0.4.0](https://github.com/jpwallace22/react-lazify/compare/v0.3.1...v0.4.0) (2023-05-25)
+
+
+### Bug Fixes
+
+* `dynamic` changed to default import ([#13](https://github.com/jpwallace22/react-lazify/issues/13)) ([dd3ba3e](https://github.com/jpwallace22/react-lazify/commit/dd3ba3efc05b5949e8b9be457dcc2c1c985495c7))
+* import path regex not specific enough ([7f769a3](https://github.com/jpwallace22/react-lazify/commit/7f769a30070823e0137c106e7aeec575625d051f))
+
+
+### Features
+
+* add loadable/next framework options ([#11](https://github.com/jpwallace22/react-lazify/issues/11)) ([54be333](https://github.com/jpwallace22/react-lazify/commit/54be333174d5487f9a1f5220a2e5f7c85c340260))
+* import lazy component from jsx ([#5](https://github.com/jpwallace22/react-lazify/issues/5)) ([41dcafe](https://github.com/jpwallace22/react-lazify/commit/41dcafe78e1af1d0d762de44f2367fddb06274de))
+
+
+### Performance Improvements
+
+* **convertLineToLazy:** remove noop ([863c3be](https://github.com/jpwallace22/react-lazify/commit/863c3bee180d938d9f35e4e745b0c440397da896))
+
 # Change Log
 
 All **notable** changes to React Lazify extension will be documented in this file.
