@@ -107,7 +107,7 @@
     "mocha": "^10.1.0",
     "rimraf": "^5.0.1",
     "semantic-release": "^21.0.5",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   },
   "release": {
     "branches": [
