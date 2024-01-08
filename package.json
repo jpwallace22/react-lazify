@@ -87,7 +87,7 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
+    "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.1.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
