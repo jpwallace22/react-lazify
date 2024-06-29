@@ -6,6 +6,12 @@
 ![Codecov](https://img.shields.io/codecov/c/github/jpwallace22/react-lazify?color=007173)
 ![GitHub top language](https://img.shields.io/github/languages/top/jpwallace22/react-lazify?color=007173)
 
+For the sake of being lazy, I will only show the default key commands for Mac in this README. However, if you are using a Windows or Linux machine then note:
+
+| Key   | Mac         | Windows | Linux |
+| ----- | ----------- | ------- | ----- |
+| `cmd` | Command (⌘) | Windows | Super |
+
 ## **Features**
 
 Will change any selected default import into a Lazy import. Supports React lazy imports, Next dynamic imports, and Loadable loadable imports.
